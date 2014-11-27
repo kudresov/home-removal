@@ -1,0 +1,20 @@
+<form role="form">
+  <div class="form-group">
+    <label for="room">Room</label>
+    <input type="text" ng-model="item.room" class="form-control" id="room" placeholder="Room (e.g. Living Room)">
+  </div>
+  <div class="form-group">
+    <label for="weight">Password</label>
+    <input type="number" ng-model="item.weight" class="form-control" id="weight" placeholder="12.5 kg">
+  </div>
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" ng-model="item.isFragile">Fragile
+    </label>
+  </div>
+  <div class="form-group">
+    <label for="room">Content</label>
+    <textarea class="form-control" ng-model="item.content" placeholder="Etc.: Books, Journals" rows="3"></textarea>
+  </div>
+  <button type="submit" class="btn btn-default" ng-click="dataService.addItem(item); clearSelection()">Add</button>
+</form>
