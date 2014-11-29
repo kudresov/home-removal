@@ -1,8 +1,58 @@
 <div class="row">
   <div class="col-sm-4">
-    <removal-item item="item"></removal-item>
+    <form role="form">
+	  <div class="form-group">
+	    <label for="room">Room</label>
+	    <input type="text" ng-model="selectedItem.room" class="form-control" id="room" placeholder="Room (e.g. Living Room)">
+	  </div>
+	  <div class="form-group">
+	    <label for="weight">Weight</label>
+	    <input type="number" ng-model="selectedItem.weight" class="form-control" id="weight" placeholder="12.5 kg">
+	  </div>
+	  <div class="checkbox">
+	    <label>
+	      <input type="checkbox" ng-model="selectedItem.isFragile">Fragile
+	    </label>
+	  </div>
+	  <div class="form-group">
+	    <label for="room">Content</label>
+	    <textarea class="form-control" ng-model="selectedItem.content" placeholder="Etc.: Books, Journals" rows="3"></textarea>
+	  </div>
+	  <button type="submit" 
+	  		  class="btn btn-default"	
+	  		  ng-show="removalItemService.isNew(selectedItem)" 
+	  		  ng-click="addItem(selectedItem)">
+	  		  Add
+	  </button>
+	  <button type="submit" 
+	  		  class="btn" 
+	  		  ng-hide="removalItemService.isNew(selectedItem)" 
+	  		  ng-click="updateItem(selectedItem)">
+	  		  Update
+	  </button>
+	  <button type="submit" 
+	  		  class="btn" 
+	  		  ng-click="deleteItem(selectedItem)">
+	  		  Delete
+	  </button>
+	</form>
   </div>
   <div class="col-sm-8">
-    <removal-items-overview></removal-items-overview>
+    <div class="list-group">
+		<ul>
+			<li class="list-group-item" ng-repeat="(room, group) in removalItemService.items | groupBy: 'room'">
+				{{ room }}
+				<ul>
+					<li class="list-group-item" 
+						ng-class="{active: $parent.selectedItem === item}" 
+						ng-repeat="item in group"
+						ng-click="$parent.selectItem(item)">
+						<p>{{item.content}} {{item.weight}} {{item.isFragile}}</p>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+	<a href="#/summary">Summary</a>
   </div>
 </div>
