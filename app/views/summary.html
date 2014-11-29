@@ -1,0 +1,23 @@
+<div class="list-group">
+	<h2>Heaviest</h2>
+	<ul>
+		<li class="list-group-item" 
+			ng-repeat="item in removalItemService.items | orderBy:'weight':true | first: 2">
+			<p>{{item.content}} {{item.weight}} {{item.isFragile}}</p>
+		</li>
+	</ul>
+	<h2>Fragile</h2>
+	<ul>
+		<li class="list-group-item" 
+			ng-repeat="item in removalItemService.items | filter:{isFragile: true}">
+			<p>{{item.content}} {{item.weight}} {{item.isFragile}}</p>
+		</li>
+	</ul>
+	<h2>Other</h2>
+	<ul>
+		<li class="list-group-item" 
+			ng-repeat="item in removalItemService.items | orderBy:'weight':true | after:2 | filter:{isFragile: false}">
+			<p>{{item.content}} {{item.weight}} {{item.isFragile}}</p>
+		</li>
+	</ul>
+</div>
