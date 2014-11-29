@@ -10,9 +10,15 @@ angular.module('homeRemovalApp')
   .directive('removalItem', function (removalItemService) {
     return {
       templateUrl: 'templates/removalItem.html',
+      scope: {
+        item: '='
+      },
       restrict: 'E',
       link: function postLink(scope, element, attrs) {
-        scope.dataService = removalItemService;
+        scope.addItem = function(item) {
+          removalItemService.addItem(item);
+          scope.item = null;
+        }
       }
     };
   });

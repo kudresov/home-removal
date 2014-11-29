@@ -9,18 +9,18 @@
  */
 angular.module('homeRemovalApp')
   .service('removalItemService', function () {
-    this.items = [];
+    this.items = [{room: 'One', content: 'ABC'}];
 
     this.addItem = function(item) {
-      console.log('Item added');
-      console.log(item);
+      console.log('Removal Item Service: Item added');
       this.items.push(item);
-      this.item = null;
     };
 
     this.deleteItem = function(item) {
       var itemToRemoveIndex = this.items.indexOf(item);
-      delete array[itemToRemoveIndex];
-      console.log('Item deleted');
+      if (itemToRemoveIndex > -1) {
+        this.items.splice(itemToRemoveIndex, 1);
+      }
+      console.log('Removal Item Service: Item deleted');
     };
   });
