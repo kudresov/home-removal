@@ -1,13 +1,18 @@
 <div class="row">
   <div class="col-sm-4">
-    <form role="form">
+    <form name="itemForm" role="form" ng-hide="state==='init'">
 	  <div class="form-group">
 	    <label for="room">Room</label>
-	    <input type="text" ng-model="selectedItem.room" class="form-control" id="room" placeholder="Room (e.g. Living Room)">
+	    <input type="text" 
+	    	   ng-model="selectedItem.room" 
+	    	   class="form-control" 
+	    	   id="room" 
+	    	   placeholder="Room (e.g. Living Room)"
+	    	   required>
 	  </div>
 	  <div class="form-group">
 	    <label for="weight">Weight</label>
-	    <input type="number" ng-model="selectedItem.weight" class="form-control" id="weight" placeholder="12.5 kg">
+	    <input type="number" ng-model="selectedItem.weight" class="form-control" id="weight" placeholder="12.5 kg" required>
 	  </div>
 	  <div class="checkbox">
 	    <label>
@@ -16,26 +21,36 @@
 	  </div>
 	  <div class="form-group">
 	    <label for="room">Content</label>
-	    <textarea class="form-control" ng-model="selectedItem.content" placeholder="Etc.: Books, Journals" rows="3"></textarea>
+	    <textarea class="form-control" ng-model="selectedItem.content" placeholder="Etc.: Books, Journals" rows="3" required></textarea>
 	  </div>
 	  <button type="submit" 
 	  		  class="btn btn-default"	
-	  		  ng-show="removalItemService.isNew(selectedItem)" 
-	  		  ng-click="addItem(selectedItem)">
+	  		  ng-show="state==='new'"
+	  		  ng-click="addItem(selectedItem)"
+	  		  ng-disabled="itemForm.$invalid">
 	  		  Add
 	  </button>
-	  <button type="submit" 
-	  		  class="btn" 
-	  		  ng-hide="removalItemService.isNew(selectedItem)" 
-	  		  ng-click="updateItem(selectedItem)">
+  	  <button type="submit" 
+	  		  class="btn btn-default"
+	  		  ng-show="state==='edit'"
+	  		  ng-click="updateItem(selectedItem)"
+	  		  ng-disabled="itemForm.$invalid">
 	  		  Update
 	  </button>
 	  <button type="submit" 
-	  		  class="btn" 
-	  		  ng-click="deleteItem(selectedItem)">
+	  		  class="btn btn-default"
+	  		  ng-show="state==='edit'"
+	  		  ng-click="deleteItem(selectedItem)"
+	  		  ng-disabled="itemForm.$invalid">
 	  		  Delete
 	  </button>
+  	  <button type="submit" 
+	  		  class="btn"
+	  		  ng-click="clearSelection()">
+	  		  Cancel
+	  </button>
 	</form>
+	<button class="btn" ng-show="state==='init'" ng-click="state = 'new'">New Item</button>
   </div>
   <div class="col-sm-8">
     <div class="list-group">
@@ -44,7 +59,7 @@
 				{{ room }}
 				<ul>
 					<li class="list-group-item" 
-						ng-class="{active: $parent.selectedItem === item}" 
+						ng-class="{active: $parent.selectedItem.id === item.id}" 
 						ng-repeat="item in group"
 						ng-click="$parent.selectItem(item)">
 						<p>{{item.content}} {{item.weight}} {{item.isFragile}}</p>
