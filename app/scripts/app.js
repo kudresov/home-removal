@@ -24,6 +24,6 @@ angular
           controller: 'SummaryCtrl'
         })
         .otherwise({
-          redirectTo: '/404.html'
+          redirectTo: '/'
         });
   });

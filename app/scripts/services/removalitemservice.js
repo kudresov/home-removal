@@ -5,7 +5,7 @@
  * @name homeRemovalApp.removalItemService
  * @description
  * # removalItemService
- * Service in the homeRemovalApp.
+ * Service in the homeRemovalApp. This is the main service of the app it is a central hub for controllers.
  */
 angular.module('homeRemovalApp')
   .service('removalItemService', function () {
@@ -13,7 +13,6 @@ angular.module('homeRemovalApp')
     this.items = [];
 
     this.addItem = function(item) {
-      console.log('Removal Item Service: Item added');
       item.id = id;
       id+=1;
       this.items.push(item);
@@ -36,7 +35,6 @@ angular.module('homeRemovalApp')
       if (itemToRemoveIndex > -1) {
         this.items.splice(itemToRemoveIndex, 1);
       }
-      console.log('Removal Item Service: Item deleted');
     };
 
     this.isNewItem = function(item) {

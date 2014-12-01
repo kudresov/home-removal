@@ -357,12 +357,12 @@ module.exports = function (grunt) {
     protractor: {
       options: {
         keepAlive: true,
-        configFile: "test/protractor.conf.js"
+        configFile: 'test/protractor.conf.js',
       },
       run: {
-        
+
       }
-    }
+    },
   });
 
   grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {

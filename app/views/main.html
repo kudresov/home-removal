@@ -12,7 +12,12 @@
 	  </div>
 	  <div class="form-group">
 	    <label for="weight">Weight</label>
-	    <input type="number" ng-model="selectedItem.weight" class="form-control" id="weight" placeholder="12.5 kg" required>
+	    <input type="number" 
+	    	   ng-model="selectedItem.weight" 
+	    	   class="form-control" 
+	    	   id="weight" 
+	    	   placeholder="12.5 kg" 
+	    	   required>
 	  </div>
 	  <div class="checkbox">
 	    <label>
@@ -21,7 +26,12 @@
 	  </div>
 	  <div class="form-group">
 	    <label for="room">Content</label>
-	    <textarea class="form-control" ng-model="selectedItem.content" placeholder="Etc.: Books, Journals" rows="3" required></textarea>
+	    <textarea class="form-control" 
+	    		  ng-model="selectedItem.content" 
+	    		  placeholder="Etc.: Books, Journals" 
+	    		  rows="3" 
+	    		  required>
+	    </textarea>
 	  </div>
 	  <button type="submit" 
 	  		  class="btn btn-default"	
@@ -56,13 +66,16 @@
     <div class="list-group">
 		<ul>
 			<li class="list-group-item" ng-repeat="(room, group) in removalItemService.items | groupBy: 'room'">
-				{{ room }}
+				{{room}}
 				<ul>
-					<li class="list-group-item" 
-						ng-class="{active: $parent.selectedItem.id === item.id}" 
+					<li class="list-group-item removal-item" 
+						ng-class="{active: $parent.selectedItem.id === item.id}"
 						ng-repeat="item in group"
+						href="#"
 						ng-click="$parent.selectItem(item)">
-						<p>{{item.content}} {{item.weight}} {{item.isFragile}}</p>
+						<p>Weight: {{item.weight}} kg</p>
+						<p ng-show="item.isFragile">Fragile Item!</p>
+						<p>{{item.content}}</p>
 					</li>
 				</ul>
 			</li>
